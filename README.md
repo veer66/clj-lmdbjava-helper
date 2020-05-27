@@ -2,6 +2,16 @@
 
 ## Sample
 
+
+### deps.edn
+
+````edn
+{:deps {veer66/clj-lmdbjava-helper
+        {:git/url "https://github.com/veer66/clj-lmdbjava-helper"
+         :sha "42af88b9812f3bc4ab460a900ccad8075f408686"}
+        org.lmdbjava/lmdbjava {:mvn/version "0.7.0"}}}
+````
+
 ### src/sample.clj
 
 ````Clojure
