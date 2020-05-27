@@ -1,5 +1,9 @@
 # clj-lmdbjava-helper
 
+* clj-lmdbjava-helper provides a few helper functions to manipulate lmdbjava. 
+* clj-lmdbjava-helper does not depend on any particular lmdbjava artifact. Thus it should be able to use with newer versions of lmdbjava without modifying deps.edn of this project.
+* clj-lmdbjava-helper is not intented to be a full-scale wrapper of lmdbjava.
+
 ## Sample
 
 
