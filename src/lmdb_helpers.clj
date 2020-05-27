@@ -11,16 +11,18 @@
       (.open dir-file
              open-flags)))
 
-(defn read-val [buf]
+(defn read-val* [buf]
   (let [byte-a (byte-array (.limit buf))]
     (.get buf byte-a)
-    (clojure.edn/read-string
-     (String. byte-a StandardCharsets/UTF_8))))
+    (String. byte-a StandardCharsets/UTF_8)))
+
+(defn read-val [buf]
+  (clojure.edn/read-string (read-val* buf)))
 
 (defn put!
   [db env txn key val]
   (let [key* (ByteBuffer/allocateDirect (.getMaxKeySize env))
-        val-str (str val)
+        val-str (pr-str val)
         val* (ByteBuffer/allocateDirect (* 4 (count val-str)))]
     (.flip (.put key* (.getBytes (str key) StandardCharsets/UTF_8)))
     (.flip (.put val* (.getBytes val-str)))
@@ -39,6 +41,6 @@
   []
   (when (.hasNext it)
     (let [p (.next it)]
-      (lazy-seq (cons [(read-val (.key p))
+      (lazy-seq (cons [(read-val* (.key p))
                        (read-val (.val p))]
                       (iter>seq it))))))
